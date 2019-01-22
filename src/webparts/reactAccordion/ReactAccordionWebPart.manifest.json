@@ -24,6 +24,12 @@
       },
       "officeFabricIconFontName": "Questionnaire",
       "properties": {
+        "headerBackgroundColor": "#000047",
+        "headerTextColor": "black",
+        "questionBackgroundColor": "white",
+        "questionTextColor": "black",
+        "answerBackgroundColor": "white",
+        "answerTextColor": "black",
         "description": "SPFx webpart which shows SharePoint list data in Accordion format",
         "listName": "FAQ",
         "maxItemsPerPage": 5

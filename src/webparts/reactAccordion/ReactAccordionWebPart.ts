@@ -8,12 +8,23 @@ import {
   PropertyPaneSlider
 } from '@microsoft/sp-webpart-base';
 
+import { 
+  PropertyFieldColorPicker, 
+  PropertyFieldColorPickerStyle 
+} from '@pnp/spfx-property-controls/lib/PropertyFieldColorPicker';
+
+
 import * as strings from 'ReactAccordionWebPartStrings';
 import ReactAccordion from './components/ReactAccordion';
 import { IReactAccordionProps } from './components/IReactAccordionProps';
 
 export interface IReactAccordionWebPartProps {
-  header: string;
+  headerBackgroundColor: string;
+  headerTextColor: string;
+  questioBackgroundColor: string;
+  questionTextColor: string;
+  AnswerBackgroundColor: string;
+  AnswerTextColor: string;
   listName: string;
   choice: string;
   title: string;
@@ -36,6 +47,7 @@ export default class ReactAccordionWebPart extends BaseClientSideWebPart<IReactA
         maxItemsPerPage: this.properties.maxItemsPerPage,
         updateProperty: (value: string) => {
           this.properties.title = value;
+        
         }
       }
     );
@@ -62,8 +74,71 @@ export default class ReactAccordionWebPart extends BaseClientSideWebPart<IReactA
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('header', {
-                  label: 'Header'
+                PropertyFieldColorPicker('headerBackgroundColor', {
+                  label: 'Header Background Colour',
+                  selectedColor: this.properties.headerBackgroundColor,
+                  onPropertyChange: this.onPropertyPaneFieldChanged,
+                  properties: this.properties,
+                  disabled: false,
+                  alphaSliderHidden: false,
+                  style: PropertyFieldColorPickerStyle.Full,
+                  iconName: 'Precipitation',
+                  key: 'headerBackgroundColorPicker'
+                }),
+                PropertyFieldColorPicker('headerTextColor', {
+                  label: 'Header Text Colour',
+                  selectedColor: this.properties.headerTextColor,
+                  onPropertyChange: this.onPropertyPaneFieldChanged,
+                  properties: this.properties,
+                  disabled: false,
+                  alphaSliderHidden: false,
+                  style: PropertyFieldColorPickerStyle.Full,
+                  iconName: 'Precipitation',
+                  key: 'headerTextColorPicker'
+                }),
+                PropertyFieldColorPicker('questionBackgroundColor', {
+                  label: 'Question Background Colour',
+                  selectedColor: this.properties.questioBackgroundColor,
+                  onPropertyChange: this.onPropertyPaneFieldChanged,
+                  properties: this.properties,
+                  disabled: false,
+                  alphaSliderHidden: false,
+                  style: PropertyFieldColorPickerStyle.Full,
+                  iconName: 'Precipitation',
+                  key: 'questionBackgroundColorPicker'
+                }),
+                PropertyFieldColorPicker('questionTextColor', {
+                  label: 'Question Text Colour',
+                  selectedColor: this.properties.questionTextColor,
+                  onPropertyChange: this.onPropertyPaneFieldChanged,
+                  properties: this.properties,
+                  disabled: false,
+                  alphaSliderHidden: false,
+                  style: PropertyFieldColorPickerStyle.Full,
+                  iconName: 'Precipitation',
+                  key: 'questionTextColorPicker'
+                }),
+                PropertyFieldColorPicker('answerBackgroundColor', {
+                  label: 'Answer Background Colour',
+                  selectedColor: this.properties.AnswerBackgroundColor,
+                  onPropertyChange: this.onPropertyPaneFieldChanged,
+                  properties: this.properties,
+                  disabled: false,
+                  alphaSliderHidden: false,
+                  style: PropertyFieldColorPickerStyle.Full,
+                  iconName: 'Precipitation',
+                  key: 'answerBackgroundColor'
+                }),
+                PropertyFieldColorPicker('answerTextColor', {
+                  label: 'Question Background Colour',
+                  selectedColor: this.properties.AnswerTextColor,
+                  onPropertyChange: this.onPropertyPaneFieldChanged,
+                  properties: this.properties,
+                  disabled: false,
+                  alphaSliderHidden: false,
+                  style: PropertyFieldColorPickerStyle.Full,
+                  iconName: 'Precipitation',
+                  key: 'answerTextColorPicker'
                 }),
                 PropertyPaneTextField('listName', {
                   label: strings.ListNameLabel
