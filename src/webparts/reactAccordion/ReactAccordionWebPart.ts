@@ -24,7 +24,7 @@ import styles from '../../../temp/workbench-packages/@microsoft_sp-webpart-workb
 export interface IReactAccordionWebPartProps {
   headerBackgroundColor: string;
   headerTextColor: string;
-  questioBackgroundColor: string;
+  questionBackgroundColor: string;
   questionTextColor: string;
   answerBackgroundColor: string;
   answerTextColor: string;
@@ -44,7 +44,7 @@ export default class ReactAccordionWebPart extends BaseClientSideWebPart<IReactA
       {
         headerBackgroundColor: this.properties.headerBackgroundColor,
         headerTextColor: this.properties.headerTextColor,
-        questioBackgroundColor: this.properties.questioBackgroundColor,
+        questionBackgroundColor: this.properties.questionBackgroundColor,
         questionTextColor: this.properties.questionTextColor,
         answerBackgroundColor: this.properties.answerBackgroundColor,
         answerTextColor: this.properties.answerTextColor,
@@ -62,8 +62,22 @@ export default class ReactAccordionWebPart extends BaseClientSideWebPart<IReactA
     
     ReactDom.render(element, this.domElement);
     
-    let headerstyle = `background-color: ${this.properties.headerBackgroundColor}; color: ${this.properties.headerTextColor}`;
-    this.domElement.querySelector("[class^='webPartTitle']").setAttribute("style", headerstyle );    
+    let headerStyle = `background-color: ${this.properties.headerBackgroundColor}; color: ${this.properties.headerTextColor}`;
+    
+    let questionStyle = `background-color: ${this.properties.questionBackgroundColor}; color: ${this.properties.questionTextColor}`;
+    
+    let answerStyle = `background-color: ${this.properties.answerBackgroundColor}; color: ${this.properties.answerTextColor}`;
+    this.domElement.querySelector("[class^='webPartTitle']").setAttribute("style", headerStyle );    
+   
+    let questions = this.domElement.querySelectorAll("[class^='accordion__title']");
+    for(let i = 0; i < questions.length; i++) {
+      questions[i].setAttribute("style", questionStyle);
+    }    
+
+    let answers = this.domElement.querySelectorAll("[class^='accordion__body']");
+    for(let i = 0; i < answers.length; i++) {
+      answers[i].setAttribute("style", answerStyle);
+    }   
   }
 
   protected onDispose(): void {
@@ -139,7 +153,7 @@ export default class ReactAccordionWebPart extends BaseClientSideWebPart<IReactA
                 }),
                 PropertyFieldColorPicker('questionBackgroundColor', {
                   label: strings.QuestionBackgroundColorPickerLabelName,
-                  selectedColor: this.properties.questioBackgroundColor,
+                  selectedColor: this.properties.questionBackgroundColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged,
                   properties: this.properties,
                   disabled: false,

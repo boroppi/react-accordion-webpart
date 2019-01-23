@@ -4,7 +4,7 @@ import { DisplayMode } from '@microsoft/sp-core-library';
 export interface IReactAccordionProps {
   headerBackgroundColor: string;
   headerTextColor: string;
-  questioBackgroundColor: string;
+  questionBackgroundColor: string;
   questionTextColor: string;
   answerBackgroundColor: string;
   answerTextColor: string;
