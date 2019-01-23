@@ -80,7 +80,7 @@ export default class ReactAccordion extends React.Component<IReactAccordionProps
       .then((response: { value: IAccordionListItem[] }): void => {
 
         let listItemsCollection = [...response.value];
-
+      
         this.setState({
           status: "",
           items: listItemsCollection.splice(0, this.props.maxItemsPerPage),
@@ -112,7 +112,7 @@ export default class ReactAccordion extends React.Component<IReactAccordionProps
       let listItemsCollection = [...listData];
       this.setState({ items: listItemsCollection.splice(startIndex, pageCountDivisor) });
     };
-
+    
     const items: JSX.Element[] = this.state.items.map((item: IAccordionListItem, i: number): JSX.Element => {
       return (
         <AccordionItem >
@@ -145,7 +145,7 @@ export default class ReactAccordion extends React.Component<IReactAccordionProps
     for (let i = 0; i < pageCount; i++) {
       pageButtons.push(<PrimaryButton className={styles.button} onClick={() => { _pagedButtonClick(i + 1, listItems); }}> {i + 1} </PrimaryButton>);
     }
-    return (
+    return (      
       <div className={styles.reactAccordion}>
         <div className={styles.container}>
           {faqTitle}

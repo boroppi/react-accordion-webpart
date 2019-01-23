@@ -1,8 +1,16 @@
 declare interface IReactAccordionWebPartStrings {
-  PropertyPaneDescription: string;
-  BasicGroupName: string;
+  PropertyPaneGeneralDescription: string;
+  PropertyPaneStyleDescription: string;
+  StyleGroupName: string;
+  GeneralGroupName: string;
   ListNameLabel: string;
-  MaxItemsPerPageLabel: string
+  HeaderBackgroundColorPickerLabelName: string;
+  HeaderTextColorPickerLabelName: string;
+  QuestionBackgroundColorPickerLabelName: string;
+  QuestionTextColorPickerLabelName: string;
+  AnswerBackgroundColorPickerLabelName: string;
+  AnswerTextColorPickerLabelName: string;
+  MaxItemsPerPageLabel: string;
 }
 
 declare module 'ReactAccordionWebPartStrings' {
