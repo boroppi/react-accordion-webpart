@@ -19,7 +19,7 @@ import {
 import * as strings from 'ReactAccordionWebPartStrings';
 import ReactAccordion from './components/ReactAccordion';
 import { IReactAccordionProps } from './components/IReactAccordionProps';
-import styles from '../../../temp/workbench-packages/@microsoft_sp-webpart-workbench/lib/components/mobilePreview/mobilePreviewClickStopBar/MobilePreviewClickStopBar.module.scss';
+//import styles from '../../../temp/workbench-packages/@microsoft_sp-webpart-workbench/lib/components/mobilePreview/mobilePreviewClickStopBar/MobilePreviewClickStopBar.module.scss';
 
 export interface IReactAccordionWebPartProps {
   headerBackgroundColor: string;
@@ -62,21 +62,35 @@ export default class ReactAccordionWebPart extends BaseClientSideWebPart<IReactA
     
     ReactDom.render(element, this.domElement);
     
+
     let headerStyle = `background-color: ${this.properties.headerBackgroundColor}; color: ${this.properties.headerTextColor}`;
-    
-    let questionStyle = `background-color: ${this.properties.questionBackgroundColor}; color: ${this.properties.questionTextColor}`;
-    
+    let questionStyle = `background-color: ${this.properties.questionBackgroundColor}`;
+    let questionTextStyle = `color: ${this.properties.questionTextColor} !important`;
+
     let answerStyle = `background-color: ${this.properties.answerBackgroundColor}; color: ${this.properties.answerTextColor}`;
+    
+    // Querying the dom and setting the styles of the elements
     this.domElement.querySelector("[class^='webPartTitle']").setAttribute("style", headerStyle );    
-   
+    // Set the pagination button style to header's style
+    let buttons = this.domElement.querySelectorAll('button');
+    for(let i = 0; i < buttons.length; i++){
+      buttons[i].setAttribute('style', headerStyle);
+    }
+
     let questions = this.domElement.querySelectorAll("[class^='accordion__title']");
     for(let i = 0; i < questions.length; i++) {
       questions[i].setAttribute("style", questionStyle);
+      questions[i].querySelector('.accordion__arrow').setAttribute('style',questionTextStyle);
+      questions[i].querySelector('h3').setAttribute("style", questionTextStyle);
     }    
 
     let answers = this.domElement.querySelectorAll("[class^='accordion__body']");
     for(let i = 0; i < answers.length; i++) {
       answers[i].setAttribute("style", answerStyle);
+      let spans = answers[i].querySelectorAll('span');
+      for(let k = 0; k < spans.length; k++) {
+        spans[k].setAttribute("style", answerStyle);
+      }
     }   
   }
 
