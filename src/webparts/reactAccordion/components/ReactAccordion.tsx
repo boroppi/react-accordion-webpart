@@ -29,7 +29,8 @@ export default class ReactAccordion extends React.Component<IReactAccordionProps
       items: [],
       listItems: [],
       isLoading: false,
-      loaderMessage: ''
+      loaderMessage: '',
+      headerStyle: ''
     };
 
     if (!this.listNotConfigured(this.props)) {
@@ -66,7 +67,7 @@ export default class ReactAccordion extends React.Component<IReactAccordionProps
   }
 
   private readItems(): void {
-    let restAPI = this.props.siteUrl + `/_api/web/Lists/GetByTitle('${this.props.listName}')/items?$select=Title,Description`;
+    let restAPI = this.props.siteUrl + `/_api/web/Lists/GetByTitle('${this.props.listName}')/items?$select=Title,Description,SortOrder&$orderby=SortOrder`;
 
     this.props.spHttpClient.get(restAPI, SPHttpClient.configurations.v1, {
       headers: {
@@ -96,7 +97,6 @@ export default class ReactAccordion extends React.Component<IReactAccordionProps
           loaderMessage: ""
         });
       });
-
   }
 
   public render(): React.ReactElement<IReactAccordionProps> {
@@ -106,7 +106,8 @@ export default class ReactAccordion extends React.Component<IReactAccordionProps
     let pageCountDivisor: number = this.props.maxItemsPerPage;
     let pageCount: number;
     let pageButtons = [];
-
+    let headerStyle = this.props.headerBackgroundColor; 
+    console.log(headerStyle);
     let _pagedButtonClick = (pageNumber: number, listData: any) => {
       let startIndex: number = (pageNumber - 1) * pageCountDivisor;
       let listItemsCollection = [...listData];
@@ -116,7 +117,7 @@ export default class ReactAccordion extends React.Component<IReactAccordionProps
     const items: JSX.Element[] = this.state.items.map((item: IAccordionListItem, i: number): JSX.Element => {
       return (
         <AccordionItem >
-          <AccordionItemTitle className="accordion__title">
+          <AccordionItemTitle style={headerStyle} className="accordion__title">
             <h3 className="u-position-relative ms-fontColor-white">{item.Title}</h3>
             <div className="accordion__arrow ms-fontColor-white" role="presentation" />
           </AccordionItemTitle>

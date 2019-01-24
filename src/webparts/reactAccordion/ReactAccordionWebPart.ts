@@ -62,8 +62,10 @@ export default class ReactAccordionWebPart extends BaseClientSideWebPart<IReactA
     
     ReactDom.render(element, this.domElement);
     
-
+      
     let headerStyle = `background-color: ${this.properties.headerBackgroundColor}; color: ${this.properties.headerTextColor}`;
+    this.properties.headerBackgroundColor = headerStyle;
+    /*
     let questionStyle = `background-color: ${this.properties.questionBackgroundColor}`;
     let questionTextStyle = `color: ${this.properties.questionTextColor} !important`;
 
@@ -91,7 +93,8 @@ export default class ReactAccordionWebPart extends BaseClientSideWebPart<IReactA
       for(let k = 0; k < spans.length; k++) {
         spans[k].setAttribute("style", answerStyle);
       }
-    }   
+    }
+    */   
   }
 
   protected onDispose(): void {
@@ -124,13 +127,7 @@ export default class ReactAccordionWebPart extends BaseClientSideWebPart<IReactA
                   value: 5,
                   showValue: true,
                   step: 1
-                }),
-                PropertyPaneButton('button', {
-                  buttonType: PropertyPaneButtonType.Primary,
-                  ariaLabel: "Apply Button",
-                  onClick: (value: any) => this.render(),
-                  text: "Apply"
-                })
+                })              
               ]
             }
           ]
